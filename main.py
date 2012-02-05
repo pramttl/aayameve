@@ -29,6 +29,7 @@ class MainPage(webapp.RequestHandler):
         user = users.get_current_user()
         login_url = users.create_login_url("/")
         logout_url = users.create_logout_url("/")
+
         template_values = {
             'user':user,
             'login_url': login_url,
@@ -39,34 +40,54 @@ class MainPage(webapp.RequestHandler):
 
 class UserRegistration(webapp.RequestHandler):
     def get(self):
-        self.response.out.write('<html><body>'
-                                '<form method="POST" '
-                                'action="/user-registration">'
-                                '<table>')
-        # This generates our shopping list form and writes it in the response
-        self.response.out.write(UserRegistrationForm())
-        self.response.out.write('</table>'
-                                '<input type="submit">'
-                                '</form></body></html>')
+
+        user = users.get_current_user()
+        user_email = str(user.email())
+        login_url = users.create_login_url("/")
+        logout_url = users.create_logout_url("/")
+
+        user_object = User.all().filter("email_id =",user_email).get()
+        if user_object == None:
+            user_already_registered = False
+        else:
+            user_already_registered = True
+
+        user_registration_form = UserRegistrationForm()
+        template_values = {
+            'user':user,
+            'login_url': login_url,
+            'logout_url': logout_url,
+            'user_registration_form':user_registration_form,
+            'user_already_registered': user_already_registered,
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'templates/user-registration.html')
+        self.response.out.write(template.render(path, template_values))
 
     def post(self):
         data = UserRegistrationForm(data=self.request.POST)
+
+        user = users.get_current_user()
+        login_url = users.create_login_url("/")
+        logout_url = users.create_logout_url("/")
+
         if data.is_valid():
-            # Save the data, and redirect to the view page
+            ## Save the data, and redirect to the view page
             entity = data.save(commit=False)
             entity.email_id = str(users.get_current_user().email())
             entity.put()
-            self.redirect('/aayam-events')
+
+            template_values = {
+                'user':user,
+                'login_url': login_url,
+                'logout_url': logout_url,
+            }
+            path = os.path.join(os.path.dirname(__file__), 'templates/user-registered.html')
+            self.response.out.write(template.render(path, template_values))
         else:
-            # Reprint the form
-            self.response.out.write('<html><body>'
-                                    '<form method="POST" '
-                                    'action="/">'
-                                    '<table>')
-            self.response.out.write(data)
-            self.response.out.write('</table>'
-                                    '<input type="submit">'
-                                    '</form></body></html>')
+            ## Reprint the form
+            self.redirect("/user-registration")
+
 
 class EventRegistration(webapp.RequestHandler):
     def get(self):
@@ -97,7 +118,7 @@ class TeamRegistration(webapp.RequestHandler):
         login_url = users.create_login_url("/")
         logout_url = users.create_logout_url("/")
 
-        # Start a new session, if there are no old session variables, for the requesting user.
+        ## Start a new session, if there are no old session variables, for the requesting user.
         if sess.is_new():
             event_selected = self.request.get('event_selected')
 
@@ -189,6 +210,9 @@ application = webapp.WSGIApplication([
 ], debug=True)
 
 def main():
+    user = users.get_current_user()
+    login_url = users.create_login_url("/")
+    logout_url = users.create_logout_url("/")
     run_wsgi_app(application) # Boilerplate, Code to run the application object.
 
 if __name__ == '__main__':

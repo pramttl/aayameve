@@ -29,6 +29,8 @@ class Team(db.Model):
 class User(db.Model):
     """The model for an Event of the festival"""
     email_id = db.EmailProperty()
+    first_name = db.StringProperty()
+    last_name = db.StringProperty()
     gender = db.StringProperty(choices=set(["M", "F"]))
     mobile_number = db.PhoneNumberProperty()
     college = db.PostalAddressProperty()
@@ -55,8 +57,8 @@ class AdminTeam(appengine_admin.ModelAdmin):
 
 class AdminUser(appengine_admin.ModelAdmin):
     model = User
-    listFields = ('email_id','mobile_number','college','team_list_viewable','date')
-    editFields = ('email_id','mobile_number','college',)
+    listFields = ('first_name','last_name','gender','email_id','mobile_number','college','team_list_viewable','date')
+    editFields = ('first_name','last_name','gender','email_id','mobile_number','college',)
     readonlyFields = ('team_list_viewable','date',)
 
 # Register to admin site
