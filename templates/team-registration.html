@@ -1,0 +1,33 @@
+<html>
+  <title> Aayam 2012 - Dept. of Electronics Engineering, IT-BHU </title>
+
+  <head>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+  </head>
+
+  <body>
+    {% if user %}
+    <p>Welcome, {{ user }}!</p> <hr/>
+    <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
+    <p>You have selected the following event : <b> {{ event_selected }} </b> </p>
+
+    <form action="/team-registration" method="post">
+      <p> Now, please fill in this form below. Give a suitable name to your team & select its team members. </p>
+
+      <div>TEAM NAME: <textarea name="team" va rows="1" cols="60"></textarea></div>
+
+      {% for ctr in numrange %}
+      <div>Team Member {{ ctr }}: <textarea name="member{{ ctr }}"  rows="1" cols="30"></textarea></div>
+      {% endfor %}
+
+      <p>Please Note: The user email id you enter here must be a registerd aayam email id. </p>
+      <div><input type="submit" value="REGISTER"></div>
+    </form>
+    {% else  %}
+    <p>Please Login before you can make use of our Online Registration Desk. </p> <br/>
+    <a href="{{ login_url }}"> (LOGIN) </a>
+    {% endif %}
+
+  </body>
+</html>
+

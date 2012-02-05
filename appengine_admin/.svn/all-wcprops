@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 23
+/svn/!svn/ver/112/trunk
+END
+admin_settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/107/trunk/admin_settings.py
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/95/trunk/views.py
+END
+admin_forms.py
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/111/trunk/admin_forms.py
+END
+authorized.py
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/svn/!svn/ver/39/trunk/authorized.py
+END
+admin_widgets.py
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/104/trunk/admin_widgets.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/95/trunk/__init__.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/95/trunk/utils.py
+END
+db_extensions.py
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/104/trunk/db_extensions.py
+END
+model_register.py
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/112/trunk/model_register.py
+END
+encoding.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/45/trunk/encoding.py
+END

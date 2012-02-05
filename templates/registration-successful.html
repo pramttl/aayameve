@@ -1,0 +1,21 @@
+<html>
+  <title> Aayam 2012 - Dept. of Electronics Engineering, IT-BHU </title>
+
+  <head>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
+  </head>
+
+  <body>
+    {% if user %}
+    <p>Congratulations, {{ user }}!</p> <hr/>
+    <p>Your team : <b> {{ teamname }} </b> with team members: </p>
+    {% for member in member_list %}
+      <ul>
+        <li> {{ member.email_id }} </li>
+      </ul>
+    {% endfor %}
+     <p>has successfully registerd for the event : <b> {{ event_selected }} </b> </p>
+    {% endif %}
+  </body>
+</html>
+
