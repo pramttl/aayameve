@@ -24,8 +24,8 @@
       <div><input type="submit" value="REGISTER"></div>
     </form>
     {% else  %}
+    <a href="{{ login_url }}"><div id="login"> LOGIN </div></a>
     <p>Please Login before you can make use of our Online Registration Desk. </p> <br/>
-    <a href="{{ login_url }}"> (LOGIN) </a>
     {% endif %}
 
   </body>

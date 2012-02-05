@@ -88,6 +88,62 @@ class UserRegistration(webapp.RequestHandler):
             ## Reprint the form
             self.redirect("/user-registration")
 
+## Code very repetitive to the User Registration Code, but the earlier implementation was based on ModelForms.
+'''
+class UserProfile(webapp.RequestHandler):
+    def get(self):
+        save_success = False
+        user = users.get_current_user()
+        user_email = str(user.email())
+        login_url = users.create_login_url("/")
+        logout_url = users.create_logout_url("/")
+
+        user_obj = User.all().filter("email_id =",user_email).get()
+        if user_object == None:
+            user_already_registered = False
+        else:
+            user_already_registered = True
+
+        template_values = {
+            'user':user,
+            'login_url': login_url,
+            'logout_url': logout_url,
+            'user_obj':user_obj,
+            'user_already_registered':user_already_registered,
+            'save_success':save_success,
+        }
+        path = os.path.join(os.path.dirname(__file__), 'templates/user-profile.html')
+        self.response.out.write(template.render(path, template_values))
+
+    def post(self):
+        save_success = False
+        user = users.get_current_user()
+        user_email = str(user.email())
+        login_url = users.create_login_url("/")
+        logout_url = users.create_logout_url("/")
+
+        first_name = self.request.get('first_name')
+        last_name = self.request.get('last_name')
+        gender = self.request.get('gender')
+        mobile_number = self.request.get('mobile_number')
+        college = self.request.get('college')
+
+        user_obj = User.all().filter("email_id =",user_email).get()
+
+        (user_obj.first_name,user_obj.last_name,user_obj.gender,user_obj.mobile_number,user_obj.college) = (first_name,last_name,gender,mobile_number,college)
+        user_obj.put()
+        save_success = True
+
+        template_values = {
+            'user':user,
+            'login_url': login_url,
+            'logout_url': logout_url,
+            'user_obj':user_object,
+            'save_success':save_success,
+        }
+        path = os.path.join(os.path.dirname(__file__), 'templates/user-profile.html')
+        self.response.out.write(template.render(path, template_values))
+'''
 
 class EventRegistration(webapp.RequestHandler):
     def get(self):
@@ -202,6 +258,7 @@ class TeamRegistration(webapp.RequestHandler):
 application = webapp.WSGIApplication([
     ('/', MainPage),
     ('/user-registration', UserRegistration),
+    #('/user-profile', UserProfile),
     ('/aayam-events',EventRegistration),
     ('/event-registration',TeamRegistration),
     ('/team-registration',TeamRegistration),

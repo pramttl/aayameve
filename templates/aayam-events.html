@@ -2,7 +2,8 @@
 
 {% block content %}
     {% if user %}
-    <p>Welcome, {{ user }}!</p> <a href="{{ logout_url }}"> (LOGOUT) </a><hr/>
+	<a href="{{ logout_url }}"><div id="logout"> LOGOUT </div></a>
+    <p>Welcome, {{ user }}!</p>
     <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
 
     <form action="/event-registration" method="post">
@@ -17,8 +18,8 @@
       <div><input type="submit" value="Register"></div>
     </form>
     {% else  %}
+	<a href="{{ login_url }}"><div id="login"> LOGIN </div></a>
     <p>Please Login before you can make use of our Online Registration Desk </p> <br/>
-    <a href="{{ login_url }}"> (LOGIN) </a>
     {% endif %}
 {% endblock %}
 

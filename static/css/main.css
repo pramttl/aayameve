@@ -1,4 +1,54 @@
 body {
-  font-family: Verdana, Helvetica, sans-serif;
-  background-color: #DDDDDD;
+	background-image: url("images/back.png");
+	background-repeat: repeat;
+	font-family: Verdana, Helvetica, sans-serif;
+	background-color: #DDDDDD;
+	padding: 50px 100px;
+}
+
+a#adlink {
+	color: black;
+	text-decoration: none;
+}
+
+a#adlink:hover {
+	color: green;
+	text-decoration: underline;
+}
+
+div#wrapper {
+	background-color: white;
+	border: black solid 5px;
+	padding: 20px;
+}
+
+div#head {
+	background-image: url("images/head.png");
+	height: 250px;
+	width: 250px;
+	margin-left: 40%;
+}
+
+div#logout {
+	height: 34px;
+	width: 122px;
+	background-image: url("images/logout.png");
+	background-color: #DDDDDD;
+	text-indent: -9999px;
+	float: right;
+	background-repeat: no-repeat;
+}
+
+div#login {
+	height: 30px;
+	width: 122px;
+	background-image: url("images/login.png");
+	background-color: #DDDDDD;
+	text-indent: -9999px;
+	float: right;
+	background-repeat: no-repeat;
+}
+
+div#adline {
+	text-align: center;
 }

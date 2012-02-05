@@ -2,8 +2,8 @@
 
 {% block content %}
     {% if user %}
-    <p>Welcome, {{ user }}!</p> <a href="{{ logout_url }}"> (LOGOUT) </a><hr/>
-    <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
+	<a href="{{ logout_url }}"><div id="logout"> <p>LOGOUT</p></div></a>
+    <p>Welcome, {{ user }}!</p>   
     <p> Please, Make your Choice. It is necessary for a user to be registered before he can register for an event. </p>
 
     <a href="user-registration"> (USER REGISTRATION) </a> <br/>
@@ -11,8 +11,10 @@
 
     </form>
     {% else  %}
-    <p>Please Login before you can make use of our Online Registration Desk </p> <br/>
-    <a href="{{ login_url }}"> (LOGIN) </a>
+	<p align="center"> The Aayam Registration Desk Application makes use of the Google Authentication system. So, you should be having either a Gmail account or have Google Apps Accounts (with your domain).</p>
+	<p align="center"> All '@itbhu.ac.in' email id's will work with the Application. We do not have access to any of your personal information from your Google account. It is just your email id.</p><br/>
+	<a href="{{ login_url }}"><div id="login"> <p>LOGIN</p> </div></a>
+    <p>Please Login before you can make use of our Online Registration Desk. </p> <br/>
     {% endif %}
 
 {% endblock %}

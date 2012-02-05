@@ -3,8 +3,7 @@
 {% block content %}
 
     {% if user %}
-	<a href="{{ logout_url }}"><div id="logout"> LOGOUT </div></a>
-    <p>Welcome, {{ user }}!</p>
+    <p>Welcome, {{ user }}!</p> <a href="{{ logout_url }}"> (LOGOUT) </a><hr/>
     <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
 
       {% if user_already_registered %}
@@ -12,19 +11,15 @@
       {% else %}
 
         <p> Please, remember! You have to fill in your own details, and not somebody else's details, as we shall take your ID as the google email of the currently logged in user : {{ user }}</p>
-        <form action="/user-registration" method="post">
-          <p> Please enter your details to register. </p>
-            <table>
-              {{ user_registration_form }}
-            </table>
-          <div><input type="submit" value="Register"></div>
+        <form action="/user-profile" method="post">
+
         </form>
   
       {% endif %}
     
     {% else  %}
-	<a href="{{ login_url }}"><div id="login"> LOGIN </div></a>
     <p>Please Login before you can make use of our Online Registration Desk </p> <br/>
+    <a href="{{ login_url }}"> LOGIN </a>
     {% endif %}
 
 {% endblock %}
