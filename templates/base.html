@@ -6,26 +6,8 @@
   </head>
 
   <body>
-    {% if user %}
-    <p>Welcome, {{ user }}!</p> <hr/>
-    <p> AAYAM 2012, Welcomes You to its Online Registration Desk </p>
-
-    <form action="/event-registration" method="post">
-      <p> Please select your Event and click on Register </p>
-
-      <select>
-        {% for event in events %}
-          <option value="{{ event }}">{{ event.event }}</option>
-        {% endfor %}
-      </select>
-
-      <div><input type="submit" value="Register"></div>
-    </form>
-    {% else  %}
-    <p>Please Login before you can make use of our Online Registration Desk </p> <br/>
-    <a href="{{ login_url }}"> (LOGIN) </a>
-    {% endif %}
-
+    {% block content %}
+    {% endblock %}
   </body>
 </html>
 

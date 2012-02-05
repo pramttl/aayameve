@@ -17,9 +17,58 @@ from google.appengine.ext import db
 import os
 from google.appengine.ext.webapp import template
 from sessions import gmemsess # Session Library using google "memcached" for data storage, which is not a good option, when perfect transaction is required.
+from google.appengine.ext.db import djangoforms
+
+class UserRegistrationForm(djangoforms.ModelForm):
+    class Meta:
+        model = User
+        exclude = ['email_id','date','team_list','team_list_viewable']
 
 class MainPage(webapp.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        login_url = users.create_login_url("/")
+        logout_url = users.create_logout_url("/")
+        template_values = {
+            'user':user,
+            'login_url': login_url,
+            'logout_url': logout_url,
+        }
+        path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
+        self.response.out.write(template.render(path, template_values))
 
+class UserRegistration(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write('<html><body>'
+                                '<form method="POST" '
+                                'action="/user-registration">'
+                                '<table>')
+        # This generates our shopping list form and writes it in the response
+        self.response.out.write(UserRegistrationForm())
+        self.response.out.write('</table>'
+                                '<input type="submit">'
+                                '</form></body></html>')
+
+    def post(self):
+        data = UserRegistrationForm(data=self.request.POST)
+        if data.is_valid():
+            # Save the data, and redirect to the view page
+            entity = data.save(commit=False)
+            entity.email_id = str(users.get_current_user().email())
+            entity.put()
+            self.redirect('/aayam-events')
+        else:
+            # Reprint the form
+            self.response.out.write('<html><body>'
+                                    '<form method="POST" '
+                                    'action="/">'
+                                    '<table>')
+            self.response.out.write(data)
+            self.response.out.write('</table>'
+                                    '<input type="submit">'
+                                    '</form></body></html>')
+
+class EventRegistration(webapp.RequestHandler):
     def get(self):
         events_query = Event.all().order("event")
         events = events_query.fetch(20)
@@ -35,11 +84,10 @@ class MainPage(webapp.RequestHandler):
             'logout_url': logout_url,
         }
 
-        path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
+        path = os.path.join(os.path.dirname(__file__), 'templates/aayam-events.html')
         self.response.out.write(template.render(path, template_values))
 
-class EventRegistration(webapp.RequestHandler):
-
+class TeamRegistration(webapp.RequestHandler):
     # Now since the user has selected his event, he has to create a team.
     def post(self):
         sess = gmemsess.Session(self)
@@ -88,7 +136,6 @@ class EventRegistration(webapp.RequestHandler):
                               str(self.request.get('member4')),
                               str(self.request.get('member5'))]
 
-
             team_obj.team = teamname_entered #Assigning the value of teamname entered to team property of the entity.
                 
             selected_event = sess['event_selected']
@@ -133,8 +180,10 @@ class EventRegistration(webapp.RequestHandler):
 # Code to instantiate an application object, with a list of the mappings from the URL to the corresponding HANDLER CLASS.
 application = webapp.WSGIApplication([
     ('/', MainPage),
-    ('/event-registration',EventRegistration),
-    ('/team-registration',EventRegistration),
+    ('/user-registration', UserRegistration),
+    ('/aayam-events',EventRegistration),
+    ('/event-registration',TeamRegistration),
+    ('/team-registration',TeamRegistration),
     # Admin pages
     (r'^(/admin)(.*)$', appengine_admin.Admin), 
 ], debug=True)

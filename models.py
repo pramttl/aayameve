@@ -29,6 +29,7 @@ class Team(db.Model):
 class User(db.Model):
     """The model for an Event of the festival"""
     email_id = db.EmailProperty()
+    gender = db.StringProperty(choices=set(["M", "F"]))
     mobile_number = db.PhoneNumberProperty()
     college = db.PostalAddressProperty()
     date = db.DateTimeProperty(auto_now_add=True)

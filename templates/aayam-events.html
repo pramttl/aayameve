@@ -4,15 +4,22 @@
     {% if user %}
     <p>Welcome, {{ user }}!</p> <a href="{{ logout_url }}"> (LOGOUT) </a><hr/>
     <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
-    <p> Please, Make your Choice. It is necessary for a user to be registered before he can register for an event. </p>
 
-    <a href="user-registration"> (USER REGISTRATION) </a> <br/>
-    <a href="aayam-events"> (EVENTS REGISTRATION) </a>
+    <form action="/event-registration" method="post">
+      <p> Please select your Event and click on Register </p>
 
+      <select name="event_selected">
+        {% for event in events %}
+          <option value="{{ event.event }}">{{ event.event }}</option>
+        {% endfor %}
+      </select>
+
+      <div><input type="submit" value="Register"></div>
     </form>
     {% else  %}
     <p>Please Login before you can make use of our Online Registration Desk </p> <br/>
     <a href="{{ login_url }}"> (LOGIN) </a>
     {% endif %}
-
 {% endblock %}
+
+
