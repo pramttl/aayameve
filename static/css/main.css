@@ -7,7 +7,7 @@ body {
 }
 
 a#adlink {
-	color: black;
+	color: #33AA00;
 	text-decoration: none;
 }
 
@@ -51,4 +51,35 @@ div#login {
 
 div#adline {
 	text-align: center;
+    text-decoration: bold;
+    font-size: 120%;
+}
+
+div#footer {
+	text-align: center;
+}
+
+ul#footlist {
+	list-style: none;
+}
+
+ul#footlist li {
+	display: inline;
+	margin: 0 10px;
+    background-color: #EEEE55;
+    border: black solid 2px;
+    padding: 4px;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    box-shadow: 7px 7px 4px #888888;
+}
+
+ul#footlist a {
+    text-decoration: none;
+    color: black;
+}
+
+ul#footlist a:hover {
+    text-decoration: underline;
+    color: green;
 }

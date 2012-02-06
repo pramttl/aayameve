@@ -1,15 +1,8 @@
-<html>
-  <title> Aayam 2012 - Dept. of Electronics Engineering, IT-BHU </title>
+{% extends "base.html" %} 
 
-  <head>
-    <link type="text/css" rel="stylesheet" href="/static/css/main.css" />
-  </head>
-
-  <body>
+{% block content %}
     {% if user %}
     <p>Welcome, {{ user }}!</p> <hr/>
-    <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
-    <p>You have selected the following event : <b> {{ event_selected }} </b> </p>
 
     <form action="/team-registration" method="post">
       <p> Now, please fill in this form below. Give a suitable name to your team & select its team members. </p>
@@ -28,6 +21,5 @@
     <p>Please Login before you can make use of our Online Registration Desk. </p> <br/>
     {% endif %}
 
-  </body>
-</html>
+{% endblock %}
 

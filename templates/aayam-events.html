@@ -4,7 +4,7 @@
     {% if user %}
 	<a href="{{ logout_url }}"><div id="logout"> LOGOUT </div></a>
     <p>Welcome, {{ user }}!</p>
-    <p> AAYAM 2012, Welcomes You to its Online Registration Desk (Powered by Webfuel Technologies)</p>
+    <p> AAYAM 2012, Welcomes You to its Online Event Registration Desk.</p>
 
     <form action="/event-registration" method="post">
       <p> Please select your Event and click on Register </p>
@@ -14,7 +14,7 @@
           <option value="{{ event.event }}">{{ event.event }}</option>
         {% endfor %}
       </select>
-
+      <br/> <br/>
       <div><input type="submit" value="Register"></div>
     </form>
     {% else  %}

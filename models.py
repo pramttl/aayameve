@@ -32,6 +32,7 @@ class User(db.Model):
     first_name = db.StringProperty()
     last_name = db.StringProperty()
     gender = db.StringProperty(choices=set(["M", "F"]))
+    age = db.IntegerProperty()
     mobile_number = db.PhoneNumberProperty()
     college = db.PostalAddressProperty()
     date = db.DateTimeProperty(auto_now_add=True)
@@ -57,8 +58,8 @@ class AdminTeam(appengine_admin.ModelAdmin):
 
 class AdminUser(appengine_admin.ModelAdmin):
     model = User
-    listFields = ('first_name','last_name','gender','email_id','mobile_number','college','team_list_viewable','date')
-    editFields = ('first_name','last_name','gender','email_id','mobile_number','college',)
+    listFields = ('first_name','last_name','gender','age','email_id','mobile_number','college','team_list_viewable','date')
+    editFields = ('first_name','last_name','gender','age','email_id','mobile_number','college',)
     readonlyFields = ('team_list_viewable','date',)
 
 # Register to admin site
