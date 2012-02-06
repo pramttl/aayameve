@@ -59,50 +59,6 @@ div#footer {
 	text-align: center;
 }
 
-div#pen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 400px;
-    width: 400px;
-    background: url("images/pen.png") 100%;
-    z-index: 3;
-}
-
-input#register {
-    color: black;
-    background-color: #EEEE55;
-    border: black solid 2px;
-    padding: 4px;
-    border-radius: 6px;
-    -moz-border-radius: 6px;
-    box-shadow: 10px 10px 5px black;
-    font-size: 100%;
-    margin-left: 100px;
-    margin-top: 10px;
-}
-
-input#register_event {
-    color: black;
-    background-color: #EEEE55;
-    border: black solid 2px;
-    padding: 4px;
-    border-radius: 6px;
-    -moz-border-radius: 6px;
-    box-shadow: 10px 10px 5px black;
-    font-size: 100%;
-}
-
-input#register:hover {
-    text-decoration: underline;
-    color: green;
-}
-
-input#register_event:hover {
-    text-decoration: underline;
-    color: green;
-}
-
 ul#footlist {
 	list-style: none;
 }
