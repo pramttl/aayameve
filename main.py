@@ -137,7 +137,7 @@ class TeamRegistration(webapp.RequestHandler):
 
                 sess.save()
 
-                numrange = range(1,6)
+                numrange = range(2,6)
 
                 template_values = {
                     'event_selected': event_selected,
@@ -154,7 +154,8 @@ class TeamRegistration(webapp.RequestHandler):
 
             team_obj = Team()
             teamname_entered = self.request.get('team')
-            user_email_list=[ str(self.request.get('member1')),
+
+            user_email_list=[ str(user.email()),
                               str(self.request.get('member2')),
                               str(self.request.get('member3')),
                               str(self.request.get('member4')),

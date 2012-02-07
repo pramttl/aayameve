@@ -3,17 +3,21 @@
 {% block content %}
     {% if user %}
     <p>Welcome, {{ user }}!</p> <hr/>
-
+    <p> You have selected the following event: <b> {{ event_selected }} </b> </p>
     <form action="/team-registration" method="post">
-      <p> Now, please fill in this form below. Give a suitable name to your team & select its team members. </p>
-
+      <p> Now, please fill in this form below. Give a suitable name to your team & select your other team members.
+      <h3> RULES : </h3>
+      <ul>
+        <li> Individual team members should be already registered users for Aayam 2012 </li> 
+        <li> Make sure you enter his email only, not his name. </li>
+      </ul>
       <div>TEAM NAME: <textarea name="team" va rows="1" cols="60"></textarea></div>
-
+      <hr/>
       {% for ctr in numrange %}
-      <div>Team Member {{ ctr }}: <textarea name="member{{ ctr }}"  rows="1" cols="30"></textarea></div>
+      <div>Team Member {{ ctr }} email id: <textarea name="member{{ ctr }}"  rows="1" cols="30"></textarea></div>
       {% endfor %}
 
-      <p>Please Note: The user email id you enter here must be a registerd aayam email id. </p>
+      <p>Please Note: The user email id you enter here must be a registerd aayam email id. If you enter an email id that is not a registered Aayam Id then that user won't be registered and your team will be registered with the remaining users. </p>
       <div><input type="submit" value="REGISTER" id="register"></div>
     </form>
     {% else  %}
