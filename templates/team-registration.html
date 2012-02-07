@@ -9,10 +9,14 @@
       <h3> RULES : </h3>
       <ul>
         <li> Individual team members should be already registered users for Aayam 2012 </li> 
-        <li> Make sure you enter his email only, not his name. </li>
+        <li> Make sure you enter his/her email only, not the name. </li>
+        <li> The email you enter must be a registered Aayam Email. </li>
+        <li> Maximum number of team members for any event is 5 </li>
+        <li> You are automatically registered as the 1st team member. </li>
+        <li> If an event has less than 5 members as the max team size, then leave the remaining spaces blank.</li>
       </ul>
       <div>TEAM NAME: <textarea name="team" va rows="1" cols="60"></textarea></div>
-      <hr/>
+      <br/>
       {% for ctr in numrange %}
       <div>Team Member {{ ctr }} email id: <textarea name="member{{ ctr }}"  rows="1" cols="30"></textarea></div>
       {% endfor %}

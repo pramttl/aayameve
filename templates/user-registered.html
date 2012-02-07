@@ -5,7 +5,13 @@
     {% if user %}
 	<a href="{{ logout_url }}"><div id="logout"> LOGOUT </div></a>
     <p>Congratulations, {{ user }}! You have been registered.</p> 
-    <p> You are now officially a part of the AAYAM 2012 team. Go ahead and register for any event you want to, but make sure all the team members you chose are registered before that.</p>
+    <p> You are now officially a part of the AAYAM 2012 team.</p>
+    <ul>
+        <li> Go ahead and register for any event you want to, but make sure all the team members you chose are registered before that.</li>
+        <li> Whenever you / your friend, registers you for an event, you will be sent an email automatically.</li>
+        <li> Make sure you keep checking your spam inbox also, to be aware of the same.</li>
+        <li> Preferably, add our email host to your trusted email hosts to avoid our emails from landing into your spam-box.</li>
+    </ul>
 
     {% else  %}
 	<a href="{{ login_url }}"><div id="login"> LOGIN </div></a>

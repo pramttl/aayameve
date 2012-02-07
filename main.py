@@ -5,6 +5,7 @@ import wsgiref.handlers
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
+from google.appengine.api import mail
 import appengine_admin
 
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -68,14 +69,31 @@ class UserRegistration(webapp.RequestHandler):
         data = UserRegistrationForm(data=self.request.POST)
 
         user = users.get_current_user()
+        user_email = user.email()
         login_url = users.create_login_url("/")
         logout_url = users.create_logout_url("/")
 
         if data.is_valid():
             ## Save the data, and redirect to the view page
             entity = data.save(commit=False)
-            entity.email_id = str(users.get_current_user().email())
+            entity.email_id = str(user_email)
             entity.put()
+
+            message = mail.EmailMessage(sender="admin@aayam2012.in",
+                                        subject="Congratulations! You are now a registered user for Aayam 2012")
+
+            message.to = str(user_email)
+            message.body="""
+            Dear User:
+
+            You have been successfully registered for Aayam 2012. You can now visit
+            the online registration desk, to register for any event.
+
+            Please let us know if you have any questions.
+
+            The Aayam 2012 Team
+            """
+            message.send()
 
             template_values = {
                 'user':user,
@@ -118,6 +136,7 @@ class TeamRegistration(webapp.RequestHandler):
         event_selected = self.request.get('event_selected')
 
         user = users.get_current_user()
+        user_email = user.email()
         login_url = users.create_login_url("/")
         logout_url = users.create_logout_url("/")
 
@@ -149,7 +168,7 @@ class TeamRegistration(webapp.RequestHandler):
                 path = os.path.join(os.path.dirname(__file__), 'templates/team-registration.html')
                 self.response.out.write(template.render(path, template_values))
 
-        # This 2nd condition is run when the user selects his teamname & team-mebers & then submits.
+        ## This 2nd condition is run when the user selects his teamname & team-mebers & then submits.
         elif (sess['event_selected'] and sess['pageflag']):
 
             team_obj = Team()
@@ -184,10 +203,26 @@ class TeamRegistration(webapp.RequestHandler):
 
             member_query_list = team_entity.members
 
+            message = mail.EmailMessage(sender="admin@aayamonline.appspot.com",
+                                        subject="You have been registered for an event in Aayam 2012",)
+
+            message.body="""
+            Dear %s :
+
+            You have been successfully registered for the event: %s , in Aayam 2012.
+            Either you or your friend registered you for this event online. Please let us know if you have any questions.
+            You can contact us at: admin@aayam2012.in
+
+            The Aayam 2012 Team
+            """ %(user.nickname(),selected_event)
+
+
             # Code to register the team with the corresponding member_list to the database, for admins to view.
             member_list = []
             for member in member_query_list:
                 member_list.append(str(member.email_id))
+                message.to = str(member.email_id)
+                message.send()
             team_obj.memberlist = member_list
 
             team_obj.put()
