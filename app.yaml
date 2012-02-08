@@ -1,5 +1,5 @@
 application: aayamonline
-version: 2-1
+version: 2-3
 runtime: python
 api_version: 1
 
@@ -18,6 +18,10 @@ handlers:
   script: main.py
   login: admin
 
+- url: /pranjalmittal/.*
+  script: main.py
+  login: admin
+
 - url: /tempadmin/.*
   script: $PYTHON_LIB/google/appengine/ext/admin
   login: admin
@@ -28,3 +32,6 @@ handlers:
 builtins:
 - datastore_admin: on
 - remote_api: on
+
+inbound_services:
+- mail

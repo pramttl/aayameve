@@ -7,7 +7,7 @@
     <p> AAYAM 2012, Welcomes You to its Online Event Registration Desk.</p>
 
     <form action="/event-registration" method="post">
-      <p> Please select your Event and click on Register </p>
+      <p> Please select your Event and click on Register. You wont see the register option unless you are registered as a user for Aayam. </p>
 
       <select name="event_selected">
         {% for event in events %}
@@ -15,8 +15,20 @@
         {% endfor %}
       </select>
       <br/> <br/>
-      <div><input type="submit" value="REGISTER" id="register_event"></div>
-    </form>
+
+        {% if user_registered %}
+          <div><input type="submit" value="REGISTER" id="register_event"></div>
+        {% else  %}
+          <b> Wondering Where the Submit / Register button is? </b>
+          <ol>
+            <li> Ok! Its simple, if you have not registered for Aayam 2012 in general,then how can you register for an event at Aayam? </li>
+            <li> Please Register yourself as a USER for Aayam, by clicking on <b>"USER REGISTRATION"</b> button below and filling up a small online form </li>
+            <li> Visit this page after you register as an Aayam User, and then you would find the register button here for sure! </li>
+          </ol>
+        {% endif %}
+
+        </form>
+
     {% else  %}
 	<a href="{{ login_url }}"><div id="login"> LOGIN </div></a>
     <p>Please Login before you can make use of our Online Registration Desk </p> <br/>

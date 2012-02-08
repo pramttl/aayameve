@@ -6,7 +6,10 @@ import wsgiref.handlers
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.api import mail
+
 import appengine_admin
+## This module is a ditto copy of appengine_admin but just to create another admin panel with less powers. Just a make do way.
+import aayam_admin
 
 from google.appengine.ext.webapp.util import run_wsgi_app
 
@@ -79,7 +82,7 @@ class UserRegistration(webapp.RequestHandler):
             entity.email_id = str(user_email)
             entity.put()
 
-            message = mail.EmailMessage(sender="admin@aayam2012.in",
+            message = mail.EmailMessage(sender="Aayam Support (No Reply) <admin@aayam2012.in>",
                                         subject="Congratulations! You are now a registered user for Aayam 2012")
 
             message.to = str(user_email)
@@ -113,17 +116,25 @@ class UserRegistration(webapp.RequestHandler):
 class EventRegistration(webapp.RequestHandler):
     def get(self):
         events_query = Event.all().order("event")
-        events = events_query.fetch(20)
+        events = events_query.fetch(40)
 
         user = users.get_current_user()
+        user_email = user.email()
         login_url = users.create_login_url("/")
         logout_url = users.create_logout_url("/")
+
+        user_object = User.gql("WHERE email_id = :1",str(user_email)).get()
+        if user_object == None:
+            user_registered = False
+        else:
+            user_registered = True
 
         template_values = {
             'events': events,
             'user':user,
             'login_url': login_url,
             'logout_url': logout_url,
+            'user_registered': user_registered
         }
 
         path = os.path.join(os.path.dirname(__file__), 'templates/aayam-events.html')
@@ -203,7 +214,7 @@ class TeamRegistration(webapp.RequestHandler):
 
             member_query_list = team_entity.members
 
-            message = mail.EmailMessage(sender="admin@aayamonline.appspot.com",
+            message = mail.EmailMessage(sender="admin@aayam2012.in",
                                         subject="You have been registered for an event in Aayam 2012",)
 
             message.body="""
@@ -245,7 +256,8 @@ application = webapp.WSGIApplication([
     ('/event-registration',TeamRegistration),
     ('/team-registration',TeamRegistration),
     # Admin pages
-    (r'^(/admin)(.*)$', appengine_admin.Admin), 
+    (r'^(/pranjalmittal)(.*)$', appengine_admin.Admin),
+    (r'^(/admin)(.*)$', aayam_admin.Admin),  
 ], debug=True)
 
 def main():

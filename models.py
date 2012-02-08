@@ -1,6 +1,9 @@
 from google.appengine.ext import db
 import appengine_admin
 
+## This module is a ditto copy of appengine_admin but just to create another admin panel with less powers. Just a make do way.
+import aayam_admin
+
 class Event(db.Model):
     """The model for an Event of the festival"""
     event = db.StringProperty()
@@ -34,7 +37,7 @@ class User(db.Model):
     gender = db.StringProperty(choices=set(["M", "F"]))
     age = db.IntegerProperty()
     mobile_number = db.PhoneNumberProperty()
-    college = db.PostalAddressProperty()
+    college = db.PostalAddressProperty(verbose_name="College,City")
     date = db.DateTimeProperty(auto_now_add=True)
 
     team_list = db.ListProperty(db.Key) # Useful for creating a m2m relation b/n Team & User.
@@ -60,7 +63,27 @@ class AdminUser(appengine_admin.ModelAdmin):
     model = User
     listFields = ('first_name','last_name','gender','age','email_id','mobile_number','college','team_list_viewable','date')
     editFields = ('first_name','last_name','gender','age','email_id','mobile_number','college','team_list_viewable')
-    readonlyFields = ('team_list_viewable','date',)
+    readonlyFields = ('date',)
+
+## Admin views ##
+class AdminEvent2(appengine_admin.ModelAdmin):
+    model = Event
+    listFields = ('event', 'date')
+    editFields = ('event',)
+    readonlyFields = ('date',)
+
+class AdminTeam2(appengine_admin.ModelAdmin):
+    model = Team
+    listFields = ('team', u'event', 'date','memberlist')
+    editFields = ('team',)
+    readonlyFields = (u'event', 'date','memberlist')
+
+class AdminUser2(appengine_admin.ModelAdmin):
+    model = User
+    listFields = ('first_name','last_name','gender','age','email_id','mobile_number','college','team_list_viewable','date')
+    editFields = ('first_name','last_name')
+    readonlyFields = ('date','gender','age','email_id','mobile_number','college','team_list_viewable','date',)
 
 # Register to admin site
 appengine_admin.register(AdminEvent,AdminTeam,AdminUser)
+aayam_admin.register(AdminEvent2,AdminTeam2,AdminUser2)

@@ -11,7 +11,11 @@
         <p> You are already a registered User for Aayam 2012, and need not register again. However, you can register for any of the events. </p>
       {% else %}
 
-        <p> Please, remember! You have to fill in your own details, and not somebody else's details, as we shall take your ID as the google email of the currently logged in user : {{ user }}</p>
+        <p> Please, remember! You have to fill in your own details, and not somebody else's details, as we shall take your ID as the google email of the currently logged in user : <b> {{ user }} </b></p>
+        <ul>
+          <li> Although, all the fields in the form are not compulsary, we would appreciate if you give us all the details as aksed.</li>
+          <li> Users with complete information will be given preference by the Aayam Hospitality Team. </li>
+        </ul>
         <form action="/user-registration" method="post">
           <p> Please enter your details to register. </p>
             <table>
