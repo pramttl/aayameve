@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+
+{% block content %}
+      <p> You selected the Event: <b>{{ event_selected }}. Here are the list of teams registered for the event. </p>
+
+      <table>
+        {% for team in teams %}
+          <tr><td>
+            {{ team.team }}     
+          </tr></td>
+        {% endfor %}
+
+{% endblock %}
+
+

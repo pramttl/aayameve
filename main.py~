@@ -229,7 +229,7 @@ class TeamRegistration(webapp.RequestHandler):
             Either you or your friend %s registered you for this event online. Please let us know if you have any questions.
             Please ensure that you or your team leader submits an abstract for the event within the permissible time limit, else your team might be 
             disqualified  (if applicable to the Event you have registered for : Please check the same on the Aayam Website : www.aayam2012.in)
-            The URL for the form submission is: https://docs.google.com/spreadsheet/embeddedform?formkey=dGJqZk1lVlAtSlhhWTJ0R3BrdEhGdVE6MQ
+            The URL for the submission shall be available soon.
 
             You can contact us at: admin@aayam2012.in
 

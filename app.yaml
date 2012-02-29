@@ -14,6 +14,10 @@ handlers:
   static_dir: appengine_admin/media
   secure: never
 
+- url: /event-teams/.*
+  script: event-teams.py
+  login: admin
+
 - url: /admin/.*
   script: main.py
   login: admin

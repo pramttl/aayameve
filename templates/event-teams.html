@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block content %}
+    <form action="/event-teams2" method="post">
+      <p> Please select an Event to see all the teams registered for the Event. </p>
+
+      <select name="event_selected">
+        {% for event in events %}
+          <option value="{{ event.event }}">{{ event.event }}</option>
+        {% endfor %}
+      </select>
+
+      <br/> <br/>
+      <div><input type="submit" value="Show Teams!" id="register_event"></div>
+    </form>
+{% endblock %}
+
+
